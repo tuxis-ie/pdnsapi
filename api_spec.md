@@ -495,6 +495,21 @@ Clients MUST NOT send a body.
 
 **TODO**: Not yet implemented.
 
+URL: /servers/:server\_id/zones/:zone\_id/import
+-----------------------------------------------
+
+Allowed methods: `PUT`
+
+Import a zone, AXFR-output or BIND-zone
+
+Client body for PUT:
+
+    {
+      "zone": "<axfr-output or bind zon>"
+    }
+
+Return format, see /servers/:server\_id/zones/:zone\_id
+
 URL: /servers/:server\_id/zones/:zone\_id/check
 -----------------------------------------------
 
