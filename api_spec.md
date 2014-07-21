@@ -284,7 +284,8 @@ zone_collection
       "servers": ["<string>", ...],
       "recursion_desired": <bool>,
       "records": [<record>, ...],
-      "comments": [<comment>, ...],
+      "zone": [BIND/AXFR formatted zone data],
+      "comments": [<comment>, ...]
     }
 
 
@@ -337,6 +338,11 @@ zone_collection
 
 * `records`: list of DNS records in the zone.
   **Note**: Modifications are supported on Authoritative only.
+
+* `zone`: BIND/AXFR Formatted zone data. If this is set, you MUST NOT set
+  records. POSTing this data will parse the zone (that can be either in
+  BIND-format or AXFR-output) and add the zone exactly like that.
+  **Note**: Authoritative only.
 
 * `comments`: list of comments in the zone.
   **Note**: Authoritative only.
@@ -494,21 +500,6 @@ Not supported for recursors.
 Clients MUST NOT send a body.
 
 **TODO**: Not yet implemented.
-
-URL: /servers/:server\_id/zones/:zone\_id/import
------------------------------------------------
-
-Allowed methods: `PUT`
-
-Import a zone, AXFR-output or BIND-zone
-
-Client body for PUT:
-
-    {
-      "zone": "<axfr-output or bind zon>"
-    }
-
-Return format, see /servers/:server\_id/zones/:zone\_id
 
 URL: /servers/:server\_id/zones/:zone\_id/check
 -----------------------------------------------
